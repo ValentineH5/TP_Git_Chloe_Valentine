@@ -22,3 +22,4 @@ git branch
 git push [depot] --delete [branche]
 git push --set-upstream origin [branche]
 gitk --all&
+git tag [nom_tag] [sha1]
