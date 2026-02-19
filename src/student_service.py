@@ -62,3 +62,49 @@ class StudentService:
 
         self._students.remove(student)
         return True
+    
+    def export_students_csv(self, file_path: str) -> None:
+        """Exports students to a CSV file.
+
+        Args:
+            file_path: Output path for the CSV file.
+
+        Returns:
+            None.
+        """
+        with open(file_path, "w", newline="", encoding="utf-8") as csv_file:
+            writer = csv.writer(csv_file)
+            writer.writerow(["id", "name"])
+
+            for student in self._students:
+                writer.writerow([student.student_id, student.name])
+
+    def export_students_json(self, file_path: str) -> None:
+        """Exports students to a JSON file.
+
+        Args:
+            file_path: Output path for the JSON file.
+
+        Returns:
+            None.
+        """
+        data: list[dict[str, str]] = []
+        for student in self._students:
+            data.append({"id": student.student_id, "name": student.name})
+
+        with open(file_path, "w", encoding="utf-8") as json_file:
+            json.dump(data, json_file, indent=2, ensure_ascii=False)
+
+    def _find_by_id(self, student_id: str) -> Student | None:
+        """Finds a student by id.
+
+        Args:
+            student_id: Id to search for.
+
+        Returns:
+            The matching Student if found, otherwise None.
+        """
+        for student in self._students:
+            if student.student_id == student_id:
+                return student
+        return None
