@@ -71,6 +71,7 @@ def main() -> None:
                 print(f"Student with id '{student_id}' removed.")
             else:
                 print(f"No student found with id '{student_id}'.")
+        
         elif command == "export":
             if len(parts) != 3:
                 print("Usage: export <format> <file_path>")
@@ -82,6 +83,9 @@ def main() -> None:
             if export_format == "json":
                 service.export_students_json(file_path)
                 print(f"Students exported to JSON file '{file_path}'.")
+            elif export_format == "csv":
+                service.export_students_csv(file_path)
+                print(f"Students exported to CSV file '{file_path}'.")
             else:
                 print("Unsupported format. Use 'csv' or 'json'.")
 

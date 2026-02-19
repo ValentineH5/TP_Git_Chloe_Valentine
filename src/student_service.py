@@ -79,6 +79,16 @@ class StudentService:
             for student in self._students:
                 writer.writerow([student.student_id, student.name])
 
+    def export_students_csv_new(self, file_path: str) -> None:
+        """nouvelle fonction export csv
+        """
+        with open(file_path, "w", newline="", encoding="utf-8") as csv_file:
+            writer = csv.writer(csv_file)
+            writer.writerow(["id", "name"])
+
+            for student in self._students:
+                writer.writerow([student.student_id, student.name])
+
     def export_students_json(self, file_path: str) -> None:
         """Exports students to a JSON file.
 
