@@ -16,6 +16,9 @@ def print_help() -> None:
     print("  add <id> <name>")
     print("  remove <id>")
     print("  help")
+    print("  export <format> <file_path>  (formats: csv, json)")
+    print("  help")
+    print("  quit")
 
 
 def main() -> None:
@@ -68,7 +71,23 @@ def main() -> None:
                 print(f"Student with id '{student_id}' removed.")
             else:
                 print(f"No student found with id '{student_id}'.")
+        elif command == "export":
+            if len(parts) != 3:
+                print("Usage: export <format> <file_path>")
+                continue
 
+            export_format: str = parts[1].lower()
+            file_path: str = parts[2]
+
+            if export_format == "json":
+                service.export_students_json(file_path)
+                print(f"Students exported to JSON file '{file_path}'.")
+            else:
+                print("Unsupported format. Use 'csv' or 'json'.")
+
+        elif command in {"quit", "exit"}:
+            print("Bye.")
+            break
 
         else:
             print("Unknown command.")

@@ -108,3 +108,19 @@ class StudentService:
             if student.student_id == student_id:
                 return student
         return None
+    
+    def export2_students_json(self, file_path: str) -> None:
+        """Exports students to a JSON file.
+
+        Args:
+            file_path: Output path for the JSON file.
+
+        Returns:
+            None.
+        """
+        data: list[dict[str, str]] = []
+        for student in self._students:
+            data.append({"id": student.student_id, "name": student.name})
+
+        with open(file_path, "w", encoding="utf-8") as json_file:
+            json.dump(data, json_file, indent=2, ensure_ascii=False)
